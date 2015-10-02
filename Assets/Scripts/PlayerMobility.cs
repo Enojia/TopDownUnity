@@ -5,15 +5,25 @@ public class PlayerMobility : MonoBehaviour
 {
     public float speed;
     public float strafeSpeed;
+
+    private Animator anim;
     private Rigidbody2D rb2D;
 
     void Start()
     {
+        anim = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
     }
-	
-	// Update is called once per frame
-	void FixedUpdate ()
+
+    void Update()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            anim.SetTrigger("Attack");
+        }
+    }
+    // Update is called once per frame
+    void FixedUpdate ()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Quaternion rot = Quaternion.LookRotation(transform.position - mousePosition, Vector3.forward);
